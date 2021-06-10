@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+            <record id="view_customer_details_form" model="ir.ui.view">
+                <field name="name">name.customer.form</field>
+                <field name="model">customer.details</field>
+                <field name="arch" type="xml">
+                    <form string="Customer Details">
+                        <sheet>
+                        <group>
+                            <group>
+                                 <field name="gst"/>
+                                 <field name="state"/>
+                                 <field name="city"/>
+                            </group>
+                            <group>
+                                  <field name="aadhar"/>
+                                  <field name="pan"/>
+                            </group>
+                            <group>
+                                <field name="address"/>
+                            </group>
+                        </group>
+                        </sheet>
+                        <footer>
+                            <button type="object" name="customer_details" string="Enter"/>
+                        </footer>
+                    </form>
+                </field>
+          </record>
+
+          <record id="action_view_customer_details_act" model="ir.actions.act_window">
+            <field name="name">customer details</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">customer.details</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field><!--Target new will open the form in new window-->
+            <!-- TODO: check if we   need this -->
+            <!-- Binding model means on which model this wizard is to be
+                 called-->
+            <field name="binding_model_id" ref="medical_store.model_medicine_order" />
+            <!--<field name="binding_view_types">list</field>-->
+        </record>
+
+        </odoo>

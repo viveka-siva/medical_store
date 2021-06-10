@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_product_medicine,access.product.medicine,model_product_medicine,base.group_user,1,1,1,1
+access_order_line,access.order.line,model_order_line,base.group_user,1,1,1,1
+access_medicine_order,access.medicine.order,model_medicine_order,base.group_user,1,1,1,1
+access_customer_details,access.customer.details,model_customer_details,base.group_user,1,1,1,1

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <odoo>
+            <data>
+            <menuitem id="medical_store_root"
+                      name="Medical Store"
+                      sequence="2"/>
+    <!--                  web_icon="fashion_system,static/description/icon.png"/>-->
+
+                <menuitem id="order_medical_store"
+                      name="Orders"
+                      sequence="2"
+                      parent="medical_store.medical_store_root"/>
+
+            <record id="view_orderlines_form" model="ir.ui.view">
+                <field name="name">view.orderlines.form</field>
+                <field name="model">order.line</field>
+                <field name="arch" type="xml">
+                   <form string="Order Lines ">
+                       <sheet>
+                           <group>
+                               <group>
+                                   <group>
+<!--                                       <field name="name" required="1"/>-->
+                                        <field name="quantity" required="1"/>
+                                        <field name="unit_price"/>
+                                        <field name="total"/>
+                                   </group>
+                                   <group>
+
+                                    </group>
+                               </group>
+                                <group name="Order line" string="Product">
+                                    <field name="product_id" nolable="1"/>
+                                </group>
+                           </group>
+                       </sheet>
+                   </form>
+                </field>
+            </record>
+            <record id="view_orderline_list" model="ir.ui.view">
+                <field name="name">view.orderline.list</field>
+                <field name="model">order.line</field>
+                <field name="arch" type="xml">
+                    <tree string="Order Lines">
+<!--                        <field name="product_name"/>-->
+                        <field name="product_id"/>
+                        <field name="quantity"/>
+<!--                    <field name="price"/>-->
+                        <field name="unit_price"/>
+                        <field name="total"/>
+<!--                        <field name="product_id" nolable="1"/>-->
+                    </tree>
+                </field>
+            </record>
+            <record id="action_order_lines" model="ir.actions.act_window">
+                <field name="name">Product</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">order.line</field>
+                <field name="view_mode">tree,form</field>
+            </record>
+
+            <record id="action_view_order_lines_tree" model="ir.actions.act_window.view">
+                <field name="sequence" eval="1"/>
+                <field name="view_mode">tree</field>
+                <field name="view_id" ref="medical_store.view_orderline_list"/>
+                <field name="act_window_id" ref="action_order_lines"/>
+            </record>
+
+            <record id="view_action_order_line_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="medical_store.view_orderlines_form"/>
+            <field name="act_window_id" ref="action_order_lines"/>
+        </record>
+           <menuitem id="orderlines_order_menu"
+                  name="Order Lines"
+                  sequence="2"
+                  parent="medical_store.order_medical_store"
+                  action="medical_store.action_order_lines"/>
+        </data>
+    </odoo>

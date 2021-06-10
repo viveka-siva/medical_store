@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+        <odoo>
+            <data>
+            <menuitem id="medical_store_root"
+                      name="Medical Store"
+                      sequence="2"/>
+    <!--                  web_icon="fashion_system,static/description/icon.png"/>-->
+
+                <menuitem id="order_medical_store"
+                      name="Orders"
+                      sequence="2"
+                      parent="medical_store.medical_store_root"/>
+
+                <record id="view_store_orders_form" model="ir.ui.view">
+                    <field name="name">view.store.order.form</field>
+                    <field name="model">medicine.order</field>
+                    <field name="arch" type="xml">
+                        <form string="Order Details">
+                            <header>
+                                <button type="object" name="calculate_total" string="Total"/>
+                                <button name="%(medical_store.action_view_customer_details_act)d" string="Customer Details" type="action" class="btn btn-success"/>
+                            </header>
+                            <sheet>
+                                 <group>
+                                   <group>
+                                        <group>
+                                            <field name="name" required="1"/>
+                                            <field name="order_date"/>
+<!--                                            <field name="calculate_total"/>-->
+                                        </group>
+                                        <group>
+                                            <group>
+                                                 <field name="total"/>
+                                                 <field name="gst_number"/>
+                                            </group>
+                                            <group>
+                                                 <field name="state_info"/>
+                                                 <field name="city_info"/>
+                                                 <field name="aadhar"/>
+                                                 <field name="pan"/>
+
+                                            </group>
+                                            <field name="address_info"/>
+                                        </group>
+                                   </group>
+                               </group>
+                               <group name="Order Lines" string="Record">
+                                        <field name="orderlist_ids" nolable="1">
+                                            <tree editable="bottom">
+<!--                                                <field name="name"/>-->
+                                                <field name="product_id"/>
+                                                <field name="quantity"/>
+                                                <field name="unit_price"/>
+                                                <field name="total"/>
+                                            </tree>
+                                        </field>
+                               </group>
+                            </sheet>
+                         </form>
+                    </field>
+                </record>
+                <record id="view_store_orders_list" model="ir.ui.view">
+                     <field name="name">view.store.orders.list</field>
+                     <field name="model">medicine.order</field>
+                    <field name="arch" type="xml">
+                        <tree string="Ordered Medicine">
+<!--                            <field name="order_ids"/>-->
+                            <field name="name"/>
+                            <field name="order_date"/>
+                            <field name="total"/>
+                             <field name="state_info"/>
+                            <field name="city_info"/>
+                            <field name="address_info"/>
+                            <field name="aadhar"/>
+                            <field name="pan"/>
+                        </tree>
+                    </field>
+                </record>
+            <record id="action_store_order" model="ir.actions.act_window">
+                <field name="name">Order Medicine</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">medicine.order</field>
+                <field name="view_mode">tree,form</field>
+            </record>
+
+            <record id="action_view_store_orders_tree" model="ir.actions.act_window.view">
+                <field name="sequence" eval="1"/>
+                <field name="view_mode">tree</field>
+                <field name="view_id" ref="medical_store.view_store_orders_list"/>
+                <field name="act_window_id" ref="action_store_order"/>
+            </record>
+
+            <record id="view_action_orders_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="medical_store.view_store_orders_form"/>
+            <field name="act_window_id" ref="action_store_order"/>
+            </record>
+                <menuitem id="store_orders_order_menu"
+                  name="Store Orders"
+                  sequence="2"
+                  parent="medical_store.order_medical_store"
+                  action="medical_store.action_store_order"/>
+        </data>
+    </odoo>
